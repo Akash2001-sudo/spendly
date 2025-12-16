@@ -1,27 +1,38 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { FaCalendarAlt } from 'react-icons/fa';
 import { useCreateExpense } from '../hooks/useExpenses';
 
 const ExpenseForm = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState<Date | null>(new Date());
 
   const createExpense = useCreateExpense();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!date) return;
     createExpense.mutate({
       description,
       amount: parseFloat(amount),
       category,
-      date,
+      date: date.toISOString().split('T')[0], // Format date to YYYY-MM-DD
     });
     setDescription('');
     setAmount('');
     setCategory('');
-    setDate('');
+    setDate(new Date());
   };
+
+  const CustomDateInput = forwardRef(({ value, onClick }: any, ref: any) => (
+    <button className="btn custom-date-input" onClick={onClick} ref={ref}>
+      <FaCalendarAlt />
+      <span>{value || 'Select Date'}</span>
+    </button>
+  ));
 
   return (
     <div className="card">
@@ -64,14 +75,12 @@ const ExpenseForm = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="date">Date</label>
-            <input
-              id="date"
-              type="date"
-              className="form-control"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
+            <label>Date</label>
+            <DatePicker
+              selected={date}
+              onChange={(date: Date | null) => setDate(date)}
+              customInput={<CustomDateInput />}
+              dateFormat="yyyy-MM-dd"
             />
           </div>
           <button className="btn btn-primary" type="submit" disabled={createExpense.isPending}>
