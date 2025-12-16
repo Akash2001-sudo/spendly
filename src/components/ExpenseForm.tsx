@@ -1,38 +1,27 @@
-import { useState, forwardRef } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { useState } from 'react';
 import { useCreateExpense } from '../hooks/useExpenses';
 
 const ExpenseForm = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-  const [date, setDate] = useState<Date | null>(new Date());
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   const createExpense = useCreateExpense();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!date) return;
     createExpense.mutate({
       description,
       amount: parseFloat(amount),
       category,
-      date: date.toISOString().split('T')[0], // Format date to YYYY-MM-DD
+      date,
     });
     setDescription('');
     setAmount('');
     setCategory('');
-    setDate(new Date());
+    setDate(new Date().toISOString().split('T')[0]);
   };
-
-  const CustomDateInput = forwardRef(({ value, onClick }: any, ref: any) => (
-    <button className="btn custom-date-input" onClick={onClick} ref={ref}>
-      <FaCalendarAlt />
-      <span>{value || 'Select Date'}</span>
-    </button>
-  ));
 
   return (
     <div className="card">
@@ -75,12 +64,14 @@ const ExpenseForm = () => {
             />
           </div>
           <div className="form-group">
-            <label>Date</label>
-            <DatePicker
-              selected={date}
-              onChange={(date: Date | null) => setDate(date)}
-              customInput={<CustomDateInput />}
-              dateFormat="yyyy-MM-dd"
+            <label htmlFor="date">Date</label>
+            <input
+              id="date"
+              type="date"
+              className="form-control"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
             />
           </div>
           <button className="btn btn-primary" type="submit" disabled={createExpense.isPending}>
