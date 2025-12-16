@@ -412,6 +412,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+@media (max-width: 480px) {
+  input[type="date"] {
+    width: 100%;
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+}
+
 
 
 
