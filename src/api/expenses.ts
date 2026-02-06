@@ -21,6 +21,17 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const getExpenses = async (): Promise<Expense[]> => {
   const response = await axiosInstance.get('/');
   // The backend uses _id, so we map it to id for the frontend
