@@ -10,9 +10,12 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import { AuthContext } from './context/AuthContext';
 import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon
+import MonthlySpendChart from './components/MonthlySpendChart'; // Import MonthlySpendChart
+import { useGetExpenses } from './hooks/useExpenses'; // Import useGetExpenses
 
 const Dashboard = () => {
   const { logout, user } = useContext(AuthContext)!;
+  const { data: expenses = [] } = useGetExpenses(); // Fetch expenses
 
   return (
     <div className="container">
@@ -37,6 +40,9 @@ const Dashboard = () => {
         </div>
       </nav>
       <div className="dashboard-content-row mt-4">
+        <div className="dashboard-column mb-4">
+          <MonthlySpendChart expenses={expenses} /> {/* Render the chart */}
+        </div>
         <div className="dashboard-column mb-4">
           <ExpenseForm />
         </div>
