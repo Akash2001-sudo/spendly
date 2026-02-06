@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import { AuthContext } from './context/AuthContext';
+import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon
 
 const Dashboard = () => {
   const { logout, user } = useContext(AuthContext)!;
@@ -28,16 +29,18 @@ const Dashboard = () => {
             <span>y</span>
           </span>
         </a>
-        <div className="d-flex align-items-center">
+        <div className="user-controls"> {/* New div for user controls */}
            <span className="me-3">Welcome, {user?.username}</span>
-           <button onClick={logout} className="btn btn-outline-danger btn-sm">Logout</button>
+           <button onClick={logout} className="btn btn-danger btn-icon" title="Logout">
+             <FaSignOutAlt />
+           </button>
         </div>
       </nav>
-      <div className="row mt-4">
-        <div className="col-lg-6 mb-4">
+      <div className="dashboard-content-row mt-4">
+        <div className="dashboard-column mb-4">
           <ExpenseForm />
         </div>
-        <div className="col-lg-6">
+        <div className="dashboard-column mb-4">
           <ExpenseList />
         </div>
       </div>

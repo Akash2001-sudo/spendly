@@ -23,7 +23,6 @@ main {
   flex-grow: 1; /* Allow main to take available space */
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 20px; /* Add some padding around the content */
   min-height: 100vh; /* Ensure main takes full viewport height */
   width: 100%;
@@ -182,7 +181,8 @@ label {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -15px;
+  margin: 0; /* Remove default negative margins from row */
+  gap: 20px;
 }
 
 .justify-content-center {
@@ -193,10 +193,19 @@ label {
 /* .col-lg-6 { ... } */
 
 
-/* 4. Navbar (unchanged, but placed after card for clarity) */
+/* 4. Navbar */
 .navbar {
   padding: 1rem;
   margin-bottom: 2rem;
+  display: flex; /* Make navbar a flex container */
+  justify-content: space-between; /* Space out items */
+  align-items: center; /* Vertically align items */
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between welcome message and button */
 }
 
 .navbar-brand {
@@ -532,297 +541,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 
-/* 8. List Group */
-.list-group {
-  padding-left: 0;
-  margin-bottom: 0;
-}
 
-.list-group-item {
-  position: relative;
+
+
+/* New dashboard layout styles */
+.dashboard-content-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1.25rem;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  flex-wrap: wrap;
+  gap: 20px; /* Explicit gap between columns */
+  margin: 0; /* Remove default negative margins from row */
+  justify-content: center; /* Center items in case of odd number or smaller screens */
 }
 
-.list-group-item:last-child {
-  border-bottom: 0;
+.dashboard-column {
+  flex: 0 0 calc(50% - 10px); /* Account for half the gap (20px / 2 = 10px) */
+  max-width: calc(50% - 10px);
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
-.text-muted {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-.fw-bold {
-  font-weight: bold;
-}
-
-/* 9. Spinner */
-.spinner {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  vertical-align: text-bottom;
-  border: 0.2em solid currentColor;
-  border-right-color: transparent;
-  border-radius: 50%;
-  animation: spinner-border 0.75s linear infinite;
-}
-
-@keyframes spinner-border {
-  to {
-    transform: rotate(360deg);
+@media (max-width: 991px) { /* On smaller screens, stack columns */
+  .dashboard-column {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px; /* Vertical gap when stacked */
+  }
+  .dashboard-column:last-child {
+    margin-bottom: 0; /* No bottom margin for the last stacked item */
   }
 }
-
-/* 10. Alert */
-.alert {
-  position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.alert-danger {
-  color: #fff;
-  background-color: rgba(220, 53, 69, 0.5);
-}
-
-.alert-info {
-  color: #fff;
-  background-color: rgba(23, 162, 184, 0.5);
-}
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 40px;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.spendly-text span {
-  display: inline-block;
-  opacity: 0;
-  animation: drop-in 0.7s ease-out forwards;
-}
-
-@keyframes drop-in {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.spendly-text span:nth-child(2) {
-  animation-delay: 0.7s;
-}
-.spendly-text span:nth-child(3) {
-  animation-delay: 1.4s;
-}
-.spendly-text span:nth-child(4) {
-  animation-delay: 2.1s;
-}
-.spendly-text span:nth-child(5) {
-  animation-delay: 2.8s;
-}
-.spendly-text span:nth-child(6) {
-  animation-delay: 3.5s;
-}
-.spendly-text span:nth-child(7) {
-  animation-delay: 4.2s;
-}
-
-/* Flexbox utilities */
-.d-flex {
-  display: flex;
-}
-.justify-content-between {
-  justify-content: space-between;
-}
-.align-items-center {
-  align-items: center;
-}
-
-/* Form Check (Checkboxes) */
-.form-check {
-  display: flex;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  margin-bottom: 1rem; /* Added margin for spacing */
-}
-
-.form-check-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.form-check-label {
-  color: #fff;
-  position: relative;
-  padding-left: 35px; /* Space for the custom checkbox */
-  margin-bottom: 0; /* Reset default label margin */
-  line-height: 25px; /* Align text vertically with custom checkbox */
-}
-
-.form-check-label::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 25px;
-  height: 25px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease-in-out;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-/* On hover, add a brighter background color */
-.form-check:hover .form-check-label::before {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
-/* When the checkbox is checked, add a blue background and a checkmark */
-.form-check-input:checked + .form-check-label::before {
-  background-color: #23a6d5; /* A color from your gradient */
-  border-color: #23a6d5;
-}
-
-/* Create the checkmark (hidden when not checked) */
-.form-check-label::after {
-  content: "";
-  position: absolute;
-  left: 9px; /* Position the checkmark */
-  top: 4px;
-  width: 5px;
-  height: 12px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-/* Show the checkmark when checked */
-.form-check-input:checked + .form-check-label::after {
-  opacity: 1;
-}
-
-/* Expense Item Layout */
-.expense-details {
-  flex-grow: 1;
-  margin: 0 15px;
-}
-
-.me-3 {
-  margin-right: 1rem;
-}
-
-.btn-icon {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.card-header h5 {
-  margin-bottom: 0;
-}
-
-/* Snackbar */
-.snackbar {
-  visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px; /* Increased to match other elements */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  color: #fff; /* Changed to white for consistency */
-  text-align: center;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-}
-
-.snackbar.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
-
-/* Date Input Styles */
-input[type="date"] {
-  min-width: auto;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  cursor: pointer;
-}
-
-@media (max-width: 480px) {
-  input[type="date"] {
-    width: 100%;
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-  }
-}
-
-
-
-
-
-
