@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react'; // Import useState
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 import ExpenseForm from './components/ExpenseForm';
@@ -9,13 +9,15 @@ import { ToastContainer } from 'react-toastify';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import { AuthContext } from './context/AuthContext';
-import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon
+import { FaSignOutAlt, FaEdit } from 'react-icons/fa'; // Import the logout and edit icon
 import MonthlySpendChart from './components/MonthlySpendChart'; // Import MonthlySpendChart
 import { useGetExpenses } from './hooks/useExpenses'; // Import useGetExpenses
+import EditProfileModal from './components/EditProfileModal'; // Import EditProfileModal
 
 const Dashboard = () => {
   const { logout, user } = useContext(AuthContext)!;
   const { data: expenses = [] } = useGetExpenses(); // Fetch expenses
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   return (
     <div className="container">
@@ -34,6 +36,13 @@ const Dashboard = () => {
         </a>
         <div className="user-controls"> {/* New div for user controls */}
            <span className="me-3">Welcome, {user?.username}</span>
+           <button 
+             onClick={() => setIsModalOpen(true)} 
+             className="btn btn-primary btn-icon btn-sm me-2" // Added styling for edit button
+             title="Edit Profile"
+           >
+             <FaEdit />
+           </button>
            <button onClick={logout} className="btn btn-danger btn-icon" title="Logout">
              <FaSignOutAlt />
            </button>
@@ -50,6 +59,8 @@ const Dashboard = () => {
           <ExpenseList />
         </div>
       </div>
+
+      <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

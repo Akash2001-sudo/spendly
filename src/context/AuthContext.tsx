@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { login as loginApi, signup as signupApi } from '../api/auth';
+import { login as loginApi, signup as signupApi, updateProfile } from '../api/auth'; // Import updateProfile
 
 interface User {
   _id: string;
@@ -13,6 +13,7 @@ interface AuthContextType {
   login: (userData: any) => Promise<void>;
   signup: (userData: any) => Promise<void>;
   logout: () => void;
+  updateUser: (userId: string, profileData: { username?: string, email?: string }) => Promise<void>; // Add updateUser
   isLoading: boolean;
 }
 
@@ -47,8 +48,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('user');
   };
 
+  const updateUser = async (userId: string, profileData: { username?: string, email?: string }) => {
+    const updatedUserData = await updateProfile(userId, profileData);
+    if (user) {
+      const newUser = { ...user, ...updatedUserData };
+      setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, updateUser, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

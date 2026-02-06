@@ -181,8 +181,8 @@ label {
 .row {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px; /* Explicit gap between columns */
   margin: 0; /* Remove default negative margins from row */
-  gap: 20px;
 }
 
 .justify-content-center {
@@ -587,4 +587,53 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex: 0 0 100%; /* Chart full width */
     max-width: 100%;
   }
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.15); /* Match glassmorphism theme */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  color: #fff;
+  position: relative;
+}
+
+.modal-content h5 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-content .form-group label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-content .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.modal-content .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
