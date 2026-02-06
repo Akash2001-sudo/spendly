@@ -3,16 +3,17 @@ import { FaTrash } from 'react-icons/fa';
 import ExpenseItem from './ExpenseItem';
 import { useGetExpenses, useDeleteExpense } from '../hooks/useExpenses';
 import { toast } from 'react-toastify';
+import Expense from '../types/Expense';
 
 const ExpenseList = () => {
-  const { data: expenses, isLoading, isError } = useGetExpenses();
+  const { data: expenses = [], isLoading, isError } = useGetExpenses();
   const deleteExpense = useDeleteExpense();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isBulkDeleting, setIsBulkDeleting] = useState(false);
 
   const handleSelectAll = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setSelectedIds(expenses ? expenses.map((exp) => exp.id) : []);
+      setSelectedIds(expenses.map((exp: Expense) => exp.id));
     } else {
       setSelectedIds([]);
     }
@@ -28,7 +29,7 @@ const ExpenseList = () => {
     return <div className="spinner"></div>;
   }
 
-  if (isError || !expenses) {
+  if (isError) {
     toast.error("Error fetching expenses.");
     return <div className="alert alert-danger">Error fetching expenses.</div>;
   }
@@ -54,7 +55,7 @@ const ExpenseList = () => {
     }
   };
 
-  const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+  const totalExpenses = expenses.reduce((acc: number, expense: Expense) => acc + expense.amount, 0);
 
   return (
     <>
@@ -68,7 +69,7 @@ const ExpenseList = () => {
                   className="form-check-input"
                   type="checkbox"
                   onChange={handleSelectAll}
-                  checked={selectedIds.length === expenses.length && expenses.length > 0}
+                  checked={expenses.length > 0 && selectedIds.length === expenses.length}
                   title="Select All"
                   id="selectAllExpenses"
                 />
@@ -93,7 +94,7 @@ const ExpenseList = () => {
             </div>
           ) : (
             <ul className="list-group">
-              {expenses.map((expense) => (
+              {expenses.map((expense: Expense) => (
                 <ExpenseItem
                   key={expense.id}
                   expense={expense}

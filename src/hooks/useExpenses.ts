@@ -7,9 +7,6 @@ export const useGetExpenses = () => {
   return useQuery<Expense[], Error>({
     queryKey: ['expenses'],
     queryFn: getExpenses,
-    onError: (error) => {
-      console.error('Error fetching expenses:', error);
-    },
   });
 };
 
