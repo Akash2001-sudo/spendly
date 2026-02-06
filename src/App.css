@@ -12,64 +12,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  background-attachment: fixed;
 }
 
-.animated-background {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
-}
 
-.normal-background {
-  background: #282c34; /* A dark, static background color */
-  background-size: cover; /* Ensure it covers the whole area */
-}
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 
-/* Toggle Button */
-.toggle-button {
-  position: fixed; /* Changed from absolute to fixed */
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #fff;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.2s ease-in-out;
-}
 
-@media (max-width: 768px) {
-  .toggle-button {
-    top: 10px;
-    right: 10px;
-  }
-}
-
-.toggle-button:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-.toggle-button:active {
-  transform: translateY(0);
-}
 
 
 /* 2. Layout */

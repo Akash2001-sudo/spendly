@@ -1,25 +1,13 @@
-import { useState, useEffect } from 'react';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import './App.css';
 import logo from './assets/logo.png';
 
 const App = () => {
-  const [isAnimatedBackground, setIsAnimatedBackground] = useState(true);
 
-  useEffect(() => {
-    document.body.className = isAnimatedBackground ? 'animated-background' : 'normal-background';
-  }, [isAnimatedBackground]);
 
   return (
     <>
-      <button
-        className="toggle-button"
-        onClick={() => setIsAnimatedBackground(!isAnimatedBackground)}
-        aria-label={isAnimatedBackground ? "Switch to normal background" : "Switch to animated background"}
-      >
-        {isAnimatedBackground ? "☀️" : "🌙"}
-      </button>
       <div className="container">
         <nav className="navbar">
           <a href="#home" className="navbar-brand">
