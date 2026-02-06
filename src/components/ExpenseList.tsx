@@ -1,45 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import ExpenseItem from './ExpenseItem';
 import { useGetExpenses, useDeleteExpense } from '../hooks/useExpenses';
+import { toast } from 'react-toastify';
 
 const ExpenseList = () => {
   const { data: expenses, isLoading, isError } = useGetExpenses();
   const deleteExpense = useDeleteExpense();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [showSnackbar, setShowSnackbar] = useState(false);
   const [isBulkDeleting, setIsBulkDeleting] = useState(false);
 
-  useEffect(() => {
-    if (showSnackbar) {
-      const timer = setTimeout(() => {
-        setShowSnackbar(false);
-      }, 3000);
-      return () => clearTimeout(timer);
+  const handleSelectAll = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedIds(expenses ? expenses.map((exp) => exp.id) : []);
+    } else {
+      setSelectedIds([]);
     }
-  }, [showSnackbar]);
+  }, [expenses]);
+
+  const handleSelect = useCallback((id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  }, []);
 
   if (isLoading) {
     return <div className="spinner"></div>;
   }
 
   if (isError || !expenses) {
+    toast.error("Error fetching expenses.");
     return <div className="alert alert-danger">Error fetching expenses.</div>;
   }
-
-  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setSelectedIds(expenses.map((exp) => exp.id));
-    } else {
-      setSelectedIds([]);
-    }
-  };
-
-  const handleSelect = (id: string) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
-  };
 
   const handleDeleteSelected = async () => {
     const allExpensesSelected = selectedIds.length === expenses.length;
@@ -49,10 +41,13 @@ const ExpenseList = () => {
     try {
       await Promise.all(deletePromises);
       if (allExpensesSelected) {
-        setShowSnackbar(true);
+        toast.success("Woohoo!!! All expenses cleared");
+      } else {
+        toast.success(`${selectedIds.length} expenses deleted.`);
       }
     } catch (error) {
       console.error("Error deleting expenses:", error);
+      toast.error("Error deleting expenses.");
     } finally {
       setIsBulkDeleting(false);
       setSelectedIds([]);
@@ -63,11 +58,6 @@ const ExpenseList = () => {
 
   return (
     <>
-      {showSnackbar && (
-        <div className="snackbar show">
-          Woohoo!!! All expenses cleared
-        </div>
-      )}
       <div className="card">
         <div className="card-header">
           <div className="d-flex justify-content-between align-items-center">
@@ -89,6 +79,7 @@ const ExpenseList = () => {
                 onClick={handleDeleteSelected}
                 disabled={selectedIds.length === 0 || isBulkDeleting}
                 title="Delete Selected"
+                aria-label="Delete Selected Expenses"
               >
                 {isBulkDeleting ? <div className="spinner"></div> : <FaTrash />}
               </button>

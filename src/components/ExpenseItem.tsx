@@ -1,3 +1,4 @@
+import React from 'react'; // Import React
 import { FaTrash } from 'react-icons/fa';
 import Expense from '../types/Expense';
 import { UseMutationResult } from '@tanstack/react-query';
@@ -9,7 +10,7 @@ interface ExpenseItemProps {
   onSelect: (id: string) => void;
 }
 
-const ExpenseItem = ({ expense, deleteExpense, isSelected, onSelect }: ExpenseItemProps) => {
+const ExpenseItem = React.memo(({ expense, deleteExpense, isSelected, onSelect }: ExpenseItemProps) => {
   const isDeleting = deleteExpense.isPending && deleteExpense.variables === expense.id;
 
   return (
@@ -36,11 +37,13 @@ const ExpenseItem = ({ expense, deleteExpense, isSelected, onSelect }: ExpenseIt
         className="btn btn-danger btn-icon"
         onClick={() => deleteExpense.mutate(expense.id)}
         disabled={isDeleting}
+        aria-label={`Delete expense: ${expense.description}`}
       >
         <FaTrash />
       </button>
     </li>
   );
-};
+}); // Wrap with React.memo
 
 export default ExpenseItem;
+

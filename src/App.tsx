@@ -2,12 +2,14 @@ import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import './App.css';
 import logo from './assets/logo.png';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <nav className="navbar">
           <a href="#home" className="navbar-brand">
