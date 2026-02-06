@@ -553,19 +553,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: center; /* Center items in case of odd number or smaller screens */
 }
 
+/* Responsive layout for Dashboard columns */
 .dashboard-column {
-  flex: 0 0 calc(50% - 10px); /* Account for half the gap (20px / 2 = 10px) */
-  max-width: calc(50% - 10px);
-  box-sizing: border-box; /* Include padding in width calculation */
+  flex: 0 0 100%; /* Default to full width on small screens */
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px; /* Vertical gap when stacked */
+}
+.dashboard-column:last-child {
+  margin-bottom: 0; /* No bottom margin for the last stacked item */
 }
 
-@media (max-width: 991px) { /* On smaller screens, stack columns */
+/* Medium screens (e.g., tablets) - 2 columns for form and list, chart full width */
+@media (min-width: 768px) {
   .dashboard-column {
+    flex: 0 0 calc(50% - 10px); /* 2 columns with a gap */
+    max-width: calc(50% - 10px);
+  }
+  /* Chart should take full width on medium screens */
+  .dashboard-chart-column {
     flex: 0 0 100%;
     max-width: 100%;
-    margin-bottom: 20px; /* Vertical gap when stacked */
   }
-  .dashboard-column:last-child {
-    margin-bottom: 0; /* No bottom margin for the last stacked item */
+}
+
+/* Large screens (e.g., desktops) - Chart full width, form and list side-by-side */
+@media (min-width: 1200px) {
+  .dashboard-column {
+    flex: 0 0 calc(50% - 10px); /* Form and List side-by-side */
+    max-width: calc(50% - 10px);
+  }
+  .dashboard-chart-column {
+    flex: 0 0 100%; /* Chart full width */
+    max-width: 100%;
   }
 }

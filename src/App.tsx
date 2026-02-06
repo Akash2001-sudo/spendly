@@ -40,7 +40,7 @@ const Dashboard = () => {
         </div>
       </nav>
       <div className="dashboard-content-row mt-4">
-        <div className="dashboard-column mb-4">
+        <div className="dashboard-column dashboard-chart-column mb-4">
           <MonthlySpendChart expenses={expenses} /> {/* Render the chart */}
         </div>
         <div className="dashboard-column mb-4">
