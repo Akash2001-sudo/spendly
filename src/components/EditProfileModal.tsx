@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 
 interface EditProfileModalProps {
   isOpen: boolean;
