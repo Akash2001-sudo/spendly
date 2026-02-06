@@ -20,7 +20,9 @@ const ExpenseItem = ({ expense, deleteExpense, isSelected, onSelect }: ExpenseIt
           type="checkbox"
           checked={isSelected}
           onChange={() => onSelect(expense.id)}
+          id={expense.id}
         />
+        <label className="form-check-label" htmlFor={expense.id}></label>
       </div>
       <div className="expense-details">
         <h5>{expense.description}</h5>

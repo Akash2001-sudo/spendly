@@ -80,7 +80,9 @@ const ExpenseList = () => {
                   onChange={handleSelectAll}
                   checked={selectedIds.length === expenses.length && expenses.length > 0}
                   title="Select All"
+                  id="selectAllExpenses"
                 />
+                <label className="form-check-label" htmlFor="selectAllExpenses"></label>
               </div>
               <button
                 className="btn btn-danger btn-icon"
