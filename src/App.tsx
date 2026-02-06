@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { ReactNode } from 'react';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import './App.css';
@@ -44,7 +45,7 @@ const Dashboard = () => {
   );
 };
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { user, isLoading } = useContext(AuthContext)!;
 
   if (isLoading) {

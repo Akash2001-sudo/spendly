@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import ExpenseItem from './ExpenseItem';
 import { useGetExpenses, useDeleteExpense } from '../hooks/useExpenses';
