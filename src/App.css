@@ -235,7 +235,7 @@ label {
   background-color: rgba(220, 53, 69, 0.8); /* Slightly more opaque */
   border: none;
   color: #fff;
-  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+  box-shadow: 0 44px 15px rgba(220, 53, 69, 0.4);
 }
 
 .btn-danger:hover {
@@ -735,4 +735,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .modal-content .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Animation for Spendly text */
+.animated-spendly {
+  display: inline-block; /* Required for transform to work correctly */
+  animation: spendly-wave 3s ease-in-out infinite; /* Increased duration for smoother animation */
+  animation-delay: 0.5s; /* Add a slight delay */
+}
+
+@keyframes spendly-wave {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    color: #23d5ab; /* Initial color */
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05) rotate(3deg);
+    color: #23a6d5; /* Peak of the wave, slightly larger, slight rotation */
+  }
+  50% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    color: #23d5ab; /* Back to original */
+  }
+  75% {
+    transform: translateY(-5px) scale(1.02) rotate(-2deg);
+    color: #23d5ab; /* Second, smaller wave */
+  }
 }

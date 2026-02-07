@@ -28,7 +28,7 @@ const LoginPage = () => {
     <main>
       <div className="login-signup-container">
         <div className="info-section">
-          <h2>Welcome to Spendly!</h2>
+          <h2>Welcome to <span className="animated-spendly">Spendly</span>!</h2>
           <p>Your ultimate personal finance tracker. Take control of your money, effortlessly.</p>
           <ul>
             <li>Track daily expenses</li>

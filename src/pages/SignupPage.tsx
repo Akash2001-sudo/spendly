@@ -29,7 +29,7 @@ const SignupPage = () => {
     <main>
       <div className="login-signup-container">
         <div className="info-section">
-          <h2>Join Spendly Today!</h2>
+          <h2>Join <span className="animated-spendly">Spendly</span> Today!</h2>
           <p>Start your journey to financial clarity. Spendly helps you track, manage, and understand your expenses with ease.</p>
           <ul>
             <li>Secure account creation</li>
