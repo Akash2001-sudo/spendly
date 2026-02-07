@@ -6,6 +6,8 @@ import App from './App';
 import './index.css';
 import ErrorBoundary from './ErrorBoundary';
 import { AuthProvider } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient();
 
@@ -16,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
           <ErrorBoundary>
             <App />
+            <ToastContainer />
           </ErrorBoundary>
         </BrowserRouter>
       </AuthProvider>

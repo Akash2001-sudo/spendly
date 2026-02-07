@@ -6,17 +6,21 @@ import { toast } from 'react-toastify';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useContext(AuthContext)!;
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await login({ email, password });
       toast.success('Logged in successfully');
       navigate('/');
     } catch (error: any) {
       toast.error(error.response?.data?.error || 'Login failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,8 +50,8 @@ const LoginPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary">
-              Login
+            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
             </button>
           </form>
           <p className="mt-3 text-center">
