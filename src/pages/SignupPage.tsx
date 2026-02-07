@@ -7,23 +7,38 @@ const SignupPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { signup } = useContext(AuthContext)!;
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await signup({ username, email, password });
       toast.success('Account created successfully');
       navigate('/');
     } catch (error: any) {
       toast.error(error.response?.data?.error || 'Signup failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <main>
       <div className="login-signup-container">
+        <div className="info-section">
+          <h2>Join Spendly Today!</h2>
+          <p>Start your journey to financial clarity. Spendly helps you track, manage, and understand your expenses with ease.</p>
+          <ul>
+            <li>Secure account creation</li>
+            <li>Intuitive expense tracking</li>
+            <li>Insightful financial reports</li>
+            <li>User-friendly interface</li>
+          </ul>
+          <p>Sign up now and gain control over your spending!</p>
+        </div>
         <div className="card">
           <h2 className="text-center">Signup</h2>
           <form onSubmit={handleSubmit}>
@@ -57,8 +72,8 @@ const SignupPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary">
-              Signup
+            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+              {isLoading ? 'Signing up...' : 'Signup'}
             </button>
           </form>
           <p className="mt-3 text-center">

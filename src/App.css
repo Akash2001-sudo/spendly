@@ -34,10 +34,77 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 450px; /* Max width for the form card */
-  margin: auto; /* Center the container itself */
+  max-width: 900px; /* Increased max-width to accommodate info section + form */
+  margin: auto;
   padding: 20px;
-  box-sizing: border-box; /* Include padding in width */
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 30px; /* Space between info section and card */
+}
+
+/* Specific Container for Login/Signup Pages */
+.login-signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px; /* Increased max-width to accommodate info section + form */
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 30px; /* Space between info section and card */
+}
+
+.info-section {
+  flex: 1; /* Allow info section to take available space */
+  min-width: 300px; /* Minimum width before wrapping */
+  padding: 20px;
+  text-align: left;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  animation: cardFadeIn 1s ease-out forwards; /* Reuse card animation */
+}
+
+.info-section h2 {
+  color: #23d5ab; /* Highlight color for heading */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.info-section ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.info-section li {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 25px; /* Space for custom bullet */
+}
+
+.info-section li::before {
+  content: '✓'; /* Custom checkmark bullet */
+  color: #23a6d5; /* Highlight color */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: bold;
 }
 
 /* 3. Glassmorphism Elements - Enhanced Card for Login/Signup */
@@ -50,6 +117,7 @@ main {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Deeper, more spread shadow */
   padding: 30px; /* Increased padding inside the card */
   width: 100%;
+  max-width: 450px; /* Set max-width for the card itself */
   text-align: center;
   animation: cardFadeIn 1s ease-out forwards; /* New animation for the card */
 }
@@ -70,6 +138,37 @@ main {
   margin-bottom: 25px; /* More space below heading */
   font-size: 2rem; /* Larger heading */
   font-weight: 600;
+}
+
+/* Responsive adjustments for login/signup container */
+@media (max-width: 768px) {
+  .login-signup-container {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    max-width: 450px; /* Revert to smaller max-width for stacked view */
+    gap: 20px;
+  }
+
+  .info-section {
+    min-width: unset; /* Remove min-width when stacked */
+    text-align: center;
+  }
+
+  .info-section h2 {
+    font-size: 2rem;
+  }
+
+  .info-section li {
+    padding-left: 0;
+  }
+
+  .info-section li::before {
+    position: static;
+    margin-right: 5px;
+  }
+
+  .card {
+    max-width: 100%; /* Card can take full width of container */
+  }
 }
 
 /* Form Styling within card */

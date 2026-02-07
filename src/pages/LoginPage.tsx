@@ -27,6 +27,17 @@ const LoginPage = () => {
   return (
     <main>
       <div className="login-signup-container">
+        <div className="info-section">
+          <h2>Welcome to Spendly!</h2>
+          <p>Your ultimate personal finance tracker. Take control of your money, effortlessly.</p>
+          <ul>
+            <li>Track daily expenses</li>
+            <li>Categorize spending</li>
+            <li>Visualize monthly trends</li>
+            <li>Set financial goals</li>
+          </ul>
+          <p>Join us and start your journey to financial freedom today!</p>
+        </div>
         <div className="card">
           <h2 className="text-center">Login</h2>
           <form onSubmit={handleSubmit}>
