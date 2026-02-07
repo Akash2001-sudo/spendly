@@ -79,6 +79,7 @@ const SignupPage = () => {
           <p className="mt-3 text-center">
             Already have an account? <Link to="/login">Login</Link>
           </p>
+          <p className="text-center mt-3 developed-by">Developed by Akash with ❤️ in Bengaluru</p>
         </div>
       </div>
     </main>

@@ -68,6 +68,7 @@ const LoginPage = () => {
           <p className="mt-3 text-center">
             Don't have an account? <Link to="/signup">Signup</Link>
           </p>
+          <p className="text-center mt-3 developed-by">Developed by Akash with ❤️ in Bengaluru</p>
         </div>
       </div>
     </main>
