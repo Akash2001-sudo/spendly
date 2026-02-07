@@ -282,6 +282,7 @@ label {
   flex-wrap: wrap;
   gap: 20px; /* Explicit gap between columns */
   margin: 0; /* Remove default negative margins from row */
+  justify-content: center;
 }
 
 .justify-content-center {
@@ -649,7 +650,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-wrap: wrap;
   gap: 20px; /* Explicit gap between columns */
   margin: 0; /* Remove default negative margins from row */
-  justify-content: center; /* Center items in case of odd number or smaller screens */
+  justify-content: center;
 }
 
 /* Responsive layout for Dashboard columns */
@@ -760,5 +761,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   75% {
     transform: translateY(-5px) scale(1.02) rotate(-2deg);
     color: #23d5ab; /* Second, smaller wave */
+  }
+}
+
+.baby-dino-img {
+  display: block; /* Ensures it takes its own line */
+  margin: 0 auto 20px auto; /* Center horizontally, add space below */
+  width: 100px; /* Adjusted size */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10%; /* Slightly rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  animation: dino-pop-in 1.5s ease-out forwards; /* Animation for the dino */
+}
+
+@keyframes dino-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-30deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import babyDinoImg from '../assets/baby_dino_one.png';
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
@@ -29,6 +30,7 @@ const SignupPage = () => {
     <main>
       <div className="login-signup-container">
         <div className="info-section">
+          <img src={babyDinoImg} alt="Baby Dino" className="baby-dino-img" />
           <h2>Join <span className="animated-spendly">Spendly</span> Today!</h2>
           <p>Start your journey to financial clarity. Spendly helps you track, manage, and understand your expenses with ease.</p>
           <ul>
