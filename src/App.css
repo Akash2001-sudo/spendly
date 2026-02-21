@@ -1,3 +1,55 @@
+:root {
+  /* Colors */
+  --color-primary: #23a6d5; /* Used for main accents, buttons, links */
+  --color-secondary: #23d5ab; /* Used for secondary accents, gradients */
+  --color-background-dark: #0f0c29;
+  --color-background-medium: #302b63;
+  --color-background-light: #24243e;
+  --color-text-light: #fff;
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+  --color-glass-light: rgba(255, 255, 255, 0.08);
+  --color-glass-medium: rgba(255, 255, 255, 0.15);
+  --color-glass-border: rgba(255, 255, 255, 0.15);
+  --color-glass-border-light: rgba(255, 255, 255, 0.1);
+  --color-glass-input-bg: rgba(255, 255, 255, 0.05);
+  --color-error: #dc3545;
+  --color-focus-border: rgba(138, 180, 248, 0.6);
+  --color-focus-shadow: rgba(138, 180, 248, 0.2);
+
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+  --spacing-xxl: 30px;
+  --spacing-xxxl: 40px;
+
+  /* Border Radii */
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 20px;
+
+  /* Font Sizes */
+  --font-size-base: 1rem;
+  --font-size-sm: 0.9rem;
+  --font-size-md: 1.05rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.2rem;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h5: 1.8rem;
+
+  /* Box Shadows */
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 15px rgba(35, 213, 171, 0.4);
+  --shadow-xl: 0 6px 20px rgba(35, 213, 171, 0.6);
+  --shadow-error: 0 4px 15px rgba(220, 53, 69, 0.4);
+  --shadow-error-hover: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
+
 @import 'react-toastify/dist/ReactToastify.css';
 
 /* Universal Box Sizing */
@@ -7,11 +59,11 @@
 
 /* 1. Background */
 body {
-  color: #fff;
+  color: var(--color-text-light);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(to right, var(--color-background-dark), var(--color-background-medium), var(--color-background-light));
   background-attachment: fixed;
   display: flex; /* Ensure body uses flexbox */
   justify-content: center; /* Center horizontally */
@@ -23,7 +75,7 @@ main {
   flex-grow: 1; /* Allow main to take available space */
   display: flex;
   justify-content: center;
-  padding: 20px; /* Add some padding around the content */
+  padding: var(--spacing-lg); /* Add some padding around the content */
   min-height: 100vh; /* Ensure main takes full viewport height */
   width: 100%;
 }
@@ -36,71 +88,57 @@ main {
   width: 100%;
   max-width: 900px; /* Increased max-width to accommodate info section + form */
   margin: auto;
-  padding: 20px;
+  padding: var(--spacing-lg);
   box-sizing: border-box;
   flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  gap: 30px; /* Space between info section and card */
-}
-
-/* Specific Container for Login/Signup Pages */
-.login-signup-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 900px; /* Increased max-width to accommodate info section + form */
-  margin: auto;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  gap: 30px; /* Space between info section and card */
+  gap: var(--spacing-xxl); /* Space between info section and card */
 }
 
 .info-section {
   flex: 1; /* Allow info section to take available space */
   min-width: 300px; /* Minimum width before wrapping */
-  padding: 20px;
+  padding: var(--spacing-lg);
   text-align: left;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+  background: var(--color-glass-light);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
   animation: cardFadeIn 1s ease-out forwards; /* Reuse card animation */
 }
 
 .info-section h2 {
-  color: #23d5ab; /* Highlight color for heading */
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  color: var(--color-secondary); /* Highlight color for heading */
+  font-size: var(--font-size-h1);
+  margin-bottom: var(--spacing-lg);
   text-align: center;
 }
 
 .info-section p {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-md);
 }
 
 .info-section ul {
   list-style: none; /* Remove default bullet points */
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .info-section li {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   line-height: 1.8;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-sm);
   position: relative;
-  padding-left: 25px; /* Space for custom bullet */
+  padding-left: var(--spacing-xl); /* Space for custom bullet */
 }
 
 .info-section li::before {
   content: '✓'; /* Custom checkmark bullet */
-  color: #23a6d5; /* Highlight color */
+  color: var(--color-primary); /* Highlight color */
   position: absolute;
   left: 0;
   top: 0;
@@ -109,13 +147,13 @@ main {
 
 /* 3. Glassmorphism Elements - Enhanced Card for Login/Signup */
 .card {
-  background: rgba(255, 255, 255, 0.08); /* Slightly more opaque background */
+  background: var(--color-glass-light); /* Slightly more opaque background */
   backdrop-filter: blur(15px); /* Stronger blur effect */
   -webkit-backdrop-filter: blur(15px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Softer border */
-  border-radius: 20px; /* More rounded corners */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Deeper, more spread shadow */
-  padding: 30px; /* Increased padding inside the card */
+  border: 1px solid var(--color-glass-border); /* Softer border */
+  border-radius: var(--border-radius-xl); /* More rounded corners */
+  box-shadow: var(--shadow-md); /* Deeper, more spread shadow */
+  padding: var(--spacing-xxl); /* Increased padding inside the card */
   width: 100%;
   max-width: 450px; /* Set max-width for the card itself */
   text-align: center;
@@ -134,9 +172,9 @@ main {
 }
 
 .card h2 {
-  color: #fff;
-  margin-bottom: 25px; /* More space below heading */
-  font-size: 2rem; /* Larger heading */
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-h2);
   font-weight: 600;
 }
 
@@ -145,7 +183,7 @@ main {
   .login-signup-container {
     flex-direction: column; /* Stack vertically on smaller screens */
     max-width: 450px; /* Revert to smaller max-width for stacked view */
-    gap: 20px;
+    gap: var(--spacing-lg);
   }
 
   .info-section {
@@ -154,7 +192,7 @@ main {
   }
 
   .info-section h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h2);
   }
 
   .info-section li {
@@ -163,7 +201,7 @@ main {
 
   .info-section li::before {
     position: static;
-    margin-right: 5px;
+    margin-right: var(--spacing-xs);
   }
 
   .card {
@@ -173,79 +211,79 @@ main {
 
 /* Form Styling within card */
 .form-group {
-  margin-bottom: 20px; /* Consistent spacing for form groups */
+  margin-bottom: var(--spacing-lg);
 }
 
 label {
   display: block;
   text-align: left; /* Align labels to the left */
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.8); /* Slightly dimmed label color */
+  margin-bottom: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.8); /* This color is not in variables, will leave as is for now */
   font-weight: normal; /* Normal font weight for labels */
 }
 
 .form-control {
-  background: rgba(255, 255, 255, 0.05); /* Lighter input background */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter input border */
-  border-radius: 10px; /* More rounded inputs */
-  color: #fff;
+  background: var(--color-glass-input-bg); /* Lighter input background */
+  border: 1px solid var(--color-glass-border-light); /* Lighter input border */
+  border-radius: var(--border-radius-md); /* More rounded inputs */
+  color: var(--color-text-light);
   padding: 12px 15px; /* Increased input padding */
   width: 100%;
-  font-size: 1.05rem;
+  font-size: var(--font-size-md);
   transition: all 0.3s ease;
 }
 
 .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5); /* Not in variables, leaving for now */
 }
 
 .form-control:focus {
   outline: none;
-  border-color: rgba(138, 180, 248, 0.6); /* Blueish border on focus */
-  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.2); /* Soft blue glow */
-  background: rgba(255, 255, 255, 0.1); /* Slightly brighter background on focus */
+  border-color: var(--color-focus-border);
+  box-shadow: 0 0 0 3px var(--color-focus-shadow);
+  background: rgba(255, 255, 255, 0.1); /* Not in variables, leaving for now */
 }
 
 /* Buttons */
 .btn {
   width: 100%;
   padding: 12px 20px; /* Increased button padding */
-  font-size: 1.1rem; /* Larger font size for buttons */
-  border-radius: 10px; /* More rounded buttons */
+  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius-md); /* More rounded buttons */
   font-weight: 600; /* Bolder button text */
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 20px; /* Space above button */
+  margin-top: var(--spacing-lg);
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #23a6d5, #23d5ab); /* Gradient background */
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   border: none;
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(35, 213, 171, 0.4); /* Shadow matching gradient */
+  color: var(--color-text-light);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(35, 213, 171, 0.6); /* Enhanced shadow on hover */
+  box-shadow: var(--shadow-xl);
   opacity: 0.9;
 }
 
 .btn-danger {
-  background-color: rgba(220, 53, 69, 0.8); /* Slightly more opaque */
+  background-color: rgba(220, 53, 69, 0.8); /* Not in variables */
   border: none;
-  color: #fff;
-  box-shadow: 0 44px 15px rgba(220, 53, 69, 0.4);
+  color: var(--color-text-light);
+  box-shadow: var(--shadow-error);
 }
 
 .btn-danger:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+  box-shadow: var(--shadow-error-hover);
   opacity: 0.9;
 }
 
 .btn:disabled {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-glass-input-bg);
   box-shadow: none;
   transform: none;
   cursor: not-allowed;
@@ -254,34 +292,27 @@ label {
 
 /* Links below form */
 .card p {
-  margin-top: 25px; /* More space above links */
-  color: rgba(255, 255, 255, 0.7);
+  margin-top: var(--spacing-xl);
+  color: var(--color-text-muted);
 }
 
 .card p a {
-  color: #8ab4f8; /* Consistent blue for links */
+  color: #8ab4f8; /* Not in variables */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease-in-out;
 }
 
 .card p a:hover {
-  color: #a7c7fd;
+  color: #a7c7fd; /* Not in variables */
   text-decoration: underline;
 }
-
-
-/* Previous styles not directly related to login/signup card */
-
-/* 1. Background (already at the top) */
-
-/* 2. Layout (cleaned up and specific styles moved to login-signup-container and card) */
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Explicit gap between columns */
-  margin: 0; /* Remove default negative margins from row */
+  gap: var(--spacing-lg);
+  margin: 0;
   justify-content: center;
 }
 
@@ -289,14 +320,10 @@ label {
   justify-content: center;
 }
 
-/* Remove col-lg-6 as it's replaced by login-signup-container max-width */
-/* .col-lg-6 { ... } */
-
-
 /* 4. Navbar */
 .navbar {
-  padding: 1rem;
-  margin-bottom: 2rem;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xxl);
   display: flex; /* Make navbar a flex container */
   justify-content: space-between; /* Space out items */
   align-items: center; /* Vertically align items */
@@ -305,50 +332,43 @@ label {
 .user-controls {
   display: flex;
   align-items: center;
-  gap: 15px; /* Space between welcome message and button */
+  gap: var(--spacing-md); /* Space between welcome message and button */
 }
 
 .navbar-brand {
-  color: #fff;
+  color: var(--color-text-light);
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Will leave as is for now */
   font-weight: bold;
 }
 
 /* 5. Card (general card styles, login-signup-container takes precedence for login/signup) */
 /* The .card rule above specifically targets login/signup. Keep general .card minimal if needed elsewhere */
-/* .card { margin-bottom: 20px; } - removed from here, integrated into specific card styles */
 
 .card-header {
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text-light);
+  padding: var(--spacing-md) var(--font-size-xl); /* Converted to variables */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Not in variables */
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.05); /* Slightly different header background */
-  border-top-left-radius: 20px; /* Match card radius */
-  border-top-right-radius: 20px; /* Match card radius */
+  background: var(--color-glass-input-bg);
+  border-top-left-radius: var(--border-radius-xl);
+  border-top-right-radius: var(--border-radius-xl);
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: var(--font-size-xl); /* Converted to variables */
 }
 
 .card-footer {
-  padding: 0.75rem 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  padding: var(--spacing-md) var(--font-size-xl); /* Converted to variables */
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Not in variables */
+  color: var(--color-text-light);
   text-align: right;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  background: var(--color-glass-input-bg);
+  border-bottom-left-radius: var(--border-radius-xl);
+  border-bottom-right-radius: var(--border-radius-xl);
 }
-
-/* Removed previous form-group and form-control as new ones defined above */
-/* Removed previous label styling as new one defined above */
-
-/* Removed previous btn styling as new one defined above */
-/* Removed previous btn-primary and btn-danger as new ones defined above */
 
 /* 8. List Group */
 .list-group {
@@ -361,11 +381,11 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.25rem;
+  padding: var(--spacing-md) var(--font-size-xl); /* Converted to variables */
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Not in variables */
+  color: var(--color-text-light);
 }
 
 .list-group-item:last-child {
@@ -373,7 +393,7 @@ label {
 }
 
 .text-muted {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: var(--color-text-muted) !important;
 }
 
 .fw-bold {
@@ -383,8 +403,8 @@ label {
 /* 9. Spinner */
 .spinner {
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: var(--font-size-base);
+  height: var(--font-size-base);
   vertical-align: text-bottom;
   border: 0.2em solid currentColor;
   border-right-color: transparent;
@@ -401,31 +421,26 @@ label {
 /* 10. Alert */
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  padding: var(--spacing-md) var(--font-size-xl); /* Converted to variables */
+  margin-bottom: var(--font-size-base);
+  border-radius: var(--border-radius-sm); /* Using sm for 8px, closest */
   text-align: center;
   font-weight: bold;
 }
 
 .alert-danger {
-  color: #fff;
-  background-color: rgba(220, 53, 69, 0.5);
+  color: var(--color-text-light);
+  background-color: rgba(220, 53, 69, 0.5); /* Not in variables, leaving for now */
 }
 
 .alert-info {
-  color: #fff;
-  background-color: rgba(23, 162, 184, 0.5);
-}
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
+  color: var(--color-text-light);
+  background-color: rgba(23, 162, 184, 0.5); /* Not in variables, leaving for now */
 }
 
 .logo {
-  height: 40px;
-  margin-right: 10px;
+  height: var(--spacing-xxxl); /* 40px */
+  margin-right: var(--spacing-sm);
   border-radius: 50%;
 }
 
@@ -486,7 +501,7 @@ label {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  margin-bottom: 1rem; /* Added margin for spacing */
+  margin-bottom: var(--font-size-base); /* 1rem */
 }
 
 .form-check-input {
@@ -498,7 +513,7 @@ label {
 }
 
 .form-check-label {
-  color: #fff;
+  color: var(--color-text-light);
   position: relative;
   padding-left: 35px; /* Space for the custom checkbox */
   margin-bottom: 0; /* Reset default label margin */
@@ -510,11 +525,11 @@ label {
   position: absolute;
   left: 0;
   top: 0;
-  width: 25px;
-  height: 25px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
+  width: var(--spacing-xl); /* 25px */
+  height: var(--spacing-xl); /* 25px */
+  border: 2px solid rgba(255, 255, 255, 0.4); /* Not in variables */
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(255, 255, 255, 0.1); /* Not in variables */
   transition: all 0.2s ease-in-out;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -522,14 +537,14 @@ label {
 
 /* On hover, add a brighter background color */
 .form-check:hover .form-check-label::before {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2); /* Not in variables */
+  border-color: rgba(255, 255, 255, 0.6); /* Not in variables */
 }
 
 /* When the checkbox is checked, add a blue background and a checkmark */
 .form-check-input:checked + .form-check-label::before {
-  background-color: #23a6d5; /* A color from your gradient */
-  border-color: #23a6d5;
+  background-color: var(--color-primary); /* A color from your gradient */
+  border-color: var(--color-primary);
 }
 
 /* Create the checkmark (hidden when not checked) */
@@ -540,7 +555,7 @@ label {
   top: 4px;
   width: 5px;
   height: 12px;
-  border: solid white;
+  border: solid var(--color-text-light);
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -557,18 +572,18 @@ label {
 /* Expense Item Layout */
 .expense-details {
   flex-grow: 1;
-  margin: 0 15px;
+  margin: 0 var(--spacing-md);
 }
 
 .me-3 {
-  margin-right: 1rem;
+  margin-right: var(--font-size-base); /* 1rem */
 }
 
 .btn-icon {
-  width: 40px;
-  height: 40px;
+  width: var(--spacing-xxxl); /* 40px */
+  height: var(--spacing-xxxl); /* 40px */
   padding: 0;
-  font-size: 1.2rem;
+  font-size: var(--font-size-xl);
   line-height: 1;
 }
 
@@ -581,19 +596,19 @@ label {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-glass-light); /* Not in variables */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px; /* Increased to match other elements */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  color: #fff; /* Changed to white for consistency */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Not in variables */
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Not in variables */
+  color: var(--color-text-light);
   text-align: center;
-  padding: 16px;
+  padding: var(--spacing-md);
   position: fixed;
   z-index: 1;
   left: 50%;
-  bottom: 30px;
+  bottom: var(--spacing-xxl);
 }
 
 .snackbar.show {
@@ -604,21 +619,21 @@ label {
 
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  to {bottom: var(--spacing-xxl); opacity: 1;}
 }
 
 @keyframes fadein {
   from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  to {bottom: var(--spacing-xxl); opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
+  from {bottom: var(--spacing-xxl); opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
+  from {bottom: var(--spacing-xxl); opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
@@ -635,21 +650,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (max-width: 480px) {
   input[type="date"] {
     width: 100%;
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    font-size: var(--font-size-sm);
   }
 }
-
-
-
-
-
 
 /* New dashboard layout styles */
 .dashboard-content-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Explicit gap between columns */
-  margin: 0; /* Remove default negative margins from row */
+  gap: var(--spacing-lg);
+  margin: 0;
   justify-content: center;
 }
 
@@ -658,17 +668,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex: 0 0 100%; /* Default to full width on small screens */
   max-width: 100%;
   box-sizing: border-box;
-  margin-bottom: 20px; /* Vertical gap when stacked */
+  margin-bottom: var(--spacing-lg);
 }
 .dashboard-column:last-child {
-  margin-bottom: 0; /* No bottom margin for the last stacked item */
+  margin-bottom: 0;
 }
 
 /* Medium screens (e.g., tablets) - 2 columns for form and list, chart full width */
 @media (min-width: 768px) {
   .dashboard-column {
-    flex: 0 0 calc(50% - 10px); /* 2 columns with a gap */
-    max-width: calc(50% - 10px);
+    flex: 0 0 calc(50% - var(--spacing-sm)); /* 2 columns with a gap */
+    max-width: calc(50% - var(--spacing-sm));
   }
   /* Chart should take full width on medium screens */
   .dashboard-chart-column {
@@ -680,11 +690,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Large screens (e.g., desktops) - Chart full width, form and list side-by-side */
 @media (min-width: 1200px) {
   .dashboard-column {
-    flex: 0 0 calc(50% - 10px); /* Form and List side-by-side */
-    max-width: calc(50% - 10px);
+    flex: 0 0 calc(50% - var(--spacing-sm)); /* Form and List side-by-side */
+    max-width: calc(50% - var(--spacing-sm));
   }
   .dashboard-chart-column {
-    flex: 0 0 100%; /* Chart full width */
+    flex: 0 0 100%;
     max-width: 100%;
   }
 }
@@ -696,7 +706,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7); /* Not in variables */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -704,38 +714,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.15); /* Match glassmorphism theme */
+  background: var(--color-glass-medium);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Not in variables */
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); /* Not in variables */
+  padding: var(--spacing-xxl);
   width: 90%;
   max-width: 500px;
-  color: #fff;
+  color: var(--color-text-light);
   position: relative;
 }
 
 .modal-content h5 {
-  margin-bottom: 20px;
-  font-size: 1.8rem;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-h5);
   font-weight: 600;
   text-align: center;
 }
 
 .modal-content .form-group label {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9); /* Not in variables */
 }
 
 .modal-content .btn-secondary {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1); /* Not in variables */
+  border-color: rgba(255, 255, 255, 0.2); /* Not in variables */
+  color: var(--color-text-light);
 }
 
 .modal-content .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2); /* Not in variables */
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Animation for Spendly text */
@@ -748,29 +759,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @keyframes spendly-wave {
   0%, 100% {
     transform: translateY(0) scale(1) rotate(0deg);
-    color: #23d5ab; /* Initial color */
+    color: var(--color-secondary);
   }
   25% {
     transform: translateY(-10px) scale(1.05) rotate(3deg);
-    color: #23a6d5; /* Peak of the wave, slightly larger, slight rotation */
+    color: var(--color-primary);
   }
   50% {
     transform: translateY(0) scale(1) rotate(0deg);
-    color: #23d5ab; /* Back to original */
+    color: var(--color-secondary);
   }
   75% {
     transform: translateY(-5px) scale(1.02) rotate(-2deg);
-    color: #23d5ab; /* Second, smaller wave */
+    color: var(--color-secondary);
   }
 }
 
 .baby-dino-img {
   display: block; /* Ensures it takes its own line */
-  margin: 0 auto 20px auto; /* Center horizontally, add space below */
+  margin: 0 auto var(--spacing-lg) auto;
   width: 100px; /* Adjusted size */
   height: auto; /* Maintain aspect ratio */
   border-radius: 10%; /* Slightly rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  box-shadow: var(--shadow-sm);
   animation: dino-pop-in 1.5s ease-out forwards; /* Animation for the dino */
 }
 
