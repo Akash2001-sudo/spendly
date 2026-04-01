@@ -33,9 +33,16 @@ export const login = async (userData: any) => {
   return response.data;
 };
 
-// New function to update user profile
 export const updateProfile = async (userId: string, profileData: { username?: string, email?: string }): Promise<any> => {
   const response = await authApi.put(`${USERS_API_URL}/${userId}`, profileData);
+  return response.data;
+};
+
+export const updatePassword = async (
+  userId: string,
+  passwordData: { currentPassword: string; newPassword: string }
+): Promise<any> => {
+  const response = await authApi.put(`${USERS_API_URL}/${userId}/password`, passwordData);
   return response.data;
 };
 

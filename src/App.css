@@ -207,6 +207,18 @@ main {
   .card {
     max-width: 100%; /* Card can take full width of container */
   }
+
+  .expense-filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-filters-actions {
+    flex-direction: column-reverse;
+  }
+
+  .expense-filter-button {
+    width: 100%;
+  }
 }
 
 /* Form Styling within card */
@@ -357,6 +369,35 @@ label {
 
 .card-body {
   padding: var(--font-size-xl); /* Converted to variables */
+}
+
+.expense-filters {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.expense-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+.expense-filter-field {
+  margin-bottom: 0;
+}
+
+.expense-filters-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.expense-filter-button {
+  width: auto;
+  min-width: 132px;
+  margin-top: 0;
 }
 
 .card-footer {
@@ -710,7 +751,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: var(--spacing-lg);
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -722,9 +765,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); /* Not in variables */
   padding: var(--spacing-xxl);
   width: 90%;
-  max-width: 500px;
+  max-width: 560px;
+  max-height: calc(100vh - (2 * var(--spacing-lg)));
   color: var(--color-text-light);
   position: relative;
+  overflow-y: auto;
 }
 
 .modal-content h5 {
@@ -732,6 +777,64 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: var(--font-size-h5);
   font-weight: 600;
   text-align: center;
+}
+
+.modal-content .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.profile-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.profile-modal-close span {
+  display: block;
+  transform: translateY(-1px);
+}
+
+.profile-modal-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.04);
+}
+
+.profile-modal-close:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.profile-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.profile-modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-modal-field {
+  margin-bottom: var(--spacing-md);
 }
 
 .modal-content .form-group label {
@@ -747,6 +850,60 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .modal-content .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.2); /* Not in variables */
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.profile-modal-divider {
+  height: 1px;
+  margin: var(--spacing-xl) 0;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.profile-modal-section-title {
+  margin: 0 0 var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-modal-section-copy {
+  margin: 0 0 var(--spacing-lg);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
+  text-align: left;
+}
+
+.profile-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.profile-modal-actions-single {
+  justify-content: flex-end;
+}
+
+.profile-modal-button {
+  width: auto;
+  min-width: 160px;
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .modal-content {
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-height: calc(100vh - (2 * var(--spacing-md)));
+  }
+
+  .profile-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .profile-modal-button {
+    width: 100%;
+  }
 }
 
 /* Animation for Spendly text */

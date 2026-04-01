@@ -3,6 +3,12 @@ import Expense from '../types/Expense';
 
 const API_URL = 'https://spendly-sehe.onrender.com/api/expenses';
 
+export type ExpenseFilters = {
+  search?: string;
+  category?: string;
+  sort?: 'latest' | 'oldest' | 'highest' | 'lowest';
+};
+
 const axiosInstance = axios.create({
   baseURL: API_URL,
 });
@@ -32,8 +38,8 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export const getExpenses = async (): Promise<Expense[]> => {
-  const response = await axiosInstance.get('/');
+export const getExpenses = async (filters: ExpenseFilters = {}): Promise<Expense[]> => {
+  const response = await axiosInstance.get('/', { params: filters });
   // The backend uses _id, so we map it to id for the frontend
   return response.data.map((expense: any) => ({ ...expense, id: expense._id }));
 };

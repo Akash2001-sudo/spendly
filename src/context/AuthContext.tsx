@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { login as loginApi, signup as signupApi, updateProfile } from '../api/auth'; // Import updateProfile
+import {
+  login as loginApi,
+  signup as signupApi,
+  updateProfile,
+  updatePassword as updatePasswordApi,
+} from '../api/auth';
 
 interface User {
   _id: string;
@@ -13,7 +18,8 @@ interface AuthContextType {
   login: (userData: any) => Promise<void>;
   signup: (userData: any) => Promise<void>;
   logout: () => void;
-  updateUser: (userId: string, profileData: { username?: string, email?: string }) => Promise<void>; // Add updateUser
+  updateUser: (userId: string, profileData: { username?: string, email?: string }) => Promise<void>;
+  updatePassword: (userId: string, passwordData: { currentPassword: string; newPassword: string }) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -57,8 +63,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const updatePassword = async (
+    userId: string,
+    passwordData: { currentPassword: string; newPassword: string }
+  ) => {
+    await updatePasswordApi(userId, passwordData);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, updateUser, isLoading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, updateUser, updatePassword, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
