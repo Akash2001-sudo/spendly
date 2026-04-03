@@ -16,6 +16,8 @@ import EditProfileModal from './components/EditProfileModal'; // Import EditProf
 
 const MOBILE_APK_URL = 'https://expo.dev/artifacts/eas/8q39qzGZKnctupBbYcMQqX.apk';
 const MOBILE_APK_PROMO_STORAGE_KEY = 'spendly.mobile-apk-promo.dismissed.v1';
+const MOBILE_APK_PROMO_CLOSE_ICON_URL =
+  'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/x-circle-fill.svg';
 
 const Dashboard = () => {
   const { logout, user } = useContext(AuthContext)!;
@@ -63,30 +65,33 @@ const Dashboard = () => {
       </nav>
       {!isPromoDismissed ? (
         <section className="mobile-app-promo" aria-label="Download the Spendly mobile app">
-          <button
-            type="button"
-            className="mobile-app-promo-close"
-            onClick={handleDismissPromo}
-            aria-label="Dismiss mobile app promotion"
-          >
-            ×
-          </button>
           <div className="mobile-app-promo-copy">
             <span className="mobile-app-promo-badge">New</span>
-            <h2>Take Spendly with you on Android</h2>
-            <p>
-              Download the latest APK if you want a mobile-first version of Spendly for faster
-              expense tracking on the go.
-            </p>
+            <p>Try the Android app for quicker on-the-go expense tracking.</p>
           </div>
-          <a
-            href={MOBILE_APK_URL}
-            className="btn btn-primary mobile-app-promo-button"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Download APK
-          </a>
+          <div className="mobile-app-promo-actions">
+            <a
+              href={MOBILE_APK_URL}
+              className="btn btn-primary mobile-app-promo-button"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download APK
+            </a>
+            <button
+              type="button"
+              className="mobile-app-promo-close"
+              onClick={handleDismissPromo}
+              aria-label="Dismiss mobile app promotion"
+            >
+              <img
+                src={MOBILE_APK_PROMO_CLOSE_ICON_URL}
+                alt=""
+                className="mobile-app-promo-close-icon"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
         </section>
       ) : null}
       <div className="dashboard-content-row mt-4">
