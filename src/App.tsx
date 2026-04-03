@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'; // Import useState
+import { useContext, useEffect, useState } from 'react'; // Import useState
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 import ExpenseForm from './components/ExpenseForm';
@@ -14,10 +14,23 @@ import MonthlySpendChart from './components/MonthlySpendChart'; // Import Monthl
 import { useGetExpenses } from './hooks/useExpenses'; // Import useGetExpenses
 import EditProfileModal from './components/EditProfileModal'; // Import EditProfileModal
 
+const MOBILE_APK_URL = 'https://expo.dev/artifacts/eas/8q39qzGZKnctupBbYcMQqX.apk';
+const MOBILE_APK_PROMO_STORAGE_KEY = 'spendly.mobile-apk-promo.dismissed.v1';
+
 const Dashboard = () => {
   const { logout, user } = useContext(AuthContext)!;
   const { data: expenses = [] } = useGetExpenses(); // Fetch expenses
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [isPromoDismissed, setIsPromoDismissed] = useState(false);
+
+  useEffect(() => {
+    setIsPromoDismissed(localStorage.getItem(MOBILE_APK_PROMO_STORAGE_KEY) === 'true');
+  }, []);
+
+  const handleDismissPromo = () => {
+    setIsPromoDismissed(true);
+    localStorage.setItem(MOBILE_APK_PROMO_STORAGE_KEY, 'true');
+  };
 
   return (
     <div className="container">
@@ -48,6 +61,34 @@ const Dashboard = () => {
            </button>
         </div>
       </nav>
+      {!isPromoDismissed ? (
+        <section className="mobile-app-promo" aria-label="Download the Spendly mobile app">
+          <button
+            type="button"
+            className="mobile-app-promo-close"
+            onClick={handleDismissPromo}
+            aria-label="Dismiss mobile app promotion"
+          >
+            ×
+          </button>
+          <div className="mobile-app-promo-copy">
+            <span className="mobile-app-promo-badge">New</span>
+            <h2>Take Spendly with you on Android</h2>
+            <p>
+              Download the latest APK if you want a mobile-first version of Spendly for faster
+              expense tracking on the go.
+            </p>
+          </div>
+          <a
+            href={MOBILE_APK_URL}
+            className="btn btn-primary mobile-app-promo-button"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Download APK
+          </a>
+        </section>
+      ) : null}
       <div className="dashboard-content-row mt-4">
         <div className="dashboard-column dashboard-chart-column mb-4">
           <MonthlySpendChart expenses={expenses} /> {/* Render the chart */}
