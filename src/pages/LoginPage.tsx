@@ -30,7 +30,7 @@ const LoginPage = () => {
       <div className="login-signup-container">
         <div className="info-section">
           <img src={babyDinoImg} alt="Baby Dino" className="baby-dino-img" />
-          <h2>Welcome to <span className="animated-spendly">Spendly</span>!</h2>
+          <h2>Welcome to <span className="animated-spendly">Spendly</span></h2>
           <p>Your ultimate personal finance tracker. Take control of your money, effortlessly.</p>
           <ul>
             <li>Track daily expenses</li>
